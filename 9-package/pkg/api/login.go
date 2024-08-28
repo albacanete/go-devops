@@ -24,7 +24,7 @@ func doLoginRequest(client http.Client, requestURL, password string) (string, er
 
 	body, err := json.Marshal(loginRequest)
 	if err != nil {
-		return "", fmt.Errorf("Marshall error: %s", err)
+		return "", fmt.Errorf("marshall error: %s", err)
 	}
 
 	res, err := client.Post(requestURL, "application/json", bytes.NewBuffer(body))
@@ -42,14 +42,14 @@ func doLoginRequest(client http.Client, requestURL, password string) (string, er
 
 	// parse data if response code is 200
 	if res.StatusCode != 200 {
-		return "", fmt.Errorf("Invalid output (HTTP Code: %d): %s\n", res.StatusCode, string(resBody))
+		return "", fmt.Errorf("invalid output (HTTP Code: %d): %s", res.StatusCode, string(resBody))
 	}
 
 	if !json.Valid(resBody) {
 		return "", RequestError{
 			HTTPCode: res.StatusCode,
 			Body:     string(resBody),
-			Err:      fmt.Sprintf("Invalid JSON body error"),
+			Err:      "Invalid JSON body error",
 		}
 	}
 

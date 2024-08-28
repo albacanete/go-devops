@@ -11,7 +11,8 @@ type MyJWTTransport struct {
 	loginURL  string
 }
 
-func (m MyJWTTransport) RoundTrip(req *http.Request) (*http.Response, error) {
+// MyJWTTransport is a pointer because we are making changes to a variable in the struct and do not want to instanciate it every time
+func (m *MyJWTTransport) RoundTrip(req *http.Request) (*http.Response, error) {
 	if m.token == "" {
 		if m.password != "" {
 			token, err := doLoginRequest(http.Client{}, m.loginURL, m.password)

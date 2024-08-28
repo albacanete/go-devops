@@ -68,7 +68,7 @@ func (a API) DoGetRequest(requestURL string) (Response, error) {
 		return nil, RequestError{
 			HTTPCode: res.StatusCode,
 			Body:     string(body),
-			Err:      fmt.Sprintf("invalid JSON body error"),
+			Err:      "invalid JSON body error",
 		}
 	}
 
